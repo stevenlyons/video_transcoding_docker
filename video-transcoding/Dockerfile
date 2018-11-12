@@ -55,16 +55,16 @@ RUN set -ex \
   && PATH="/usr/src/ffmpeg/bin:$PATH" \
   && cd /usr/src/ffmpeg \
 
-  # NASM 2.13.01
-  && wget http://www.nasm.us/pub/nasm/releasebuilds/2.13.01/nasm-2.13.01.tar.bz2 \
-  && tar xjvf nasm-2.13.01.tar.bz2 \
-  && cd nasm-2.13.01 \
+  # NASM 2.14
+  && wget http://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.bz2 \
+  && tar xjvf nasm-2.14.tar.bz2 \
+  && cd nasm-2.14 \
   && ./autogen.sh \
   && PATH="/usr/src/ffmpeg/bin:$PATH" ./configure --prefix="/usr/src/ffmpeg/build" --bindir="/usr/src/ffmpeg/bin" \
   && PATH="/usr/src/ffmpeg/bin:$PATH" make -j"$(nproc)" \
   && make install \
   && cd /usr/src/ffmpeg \
-  && rm -rf nasm-2.13.01 \
+  && rm -rf nasm-2.14 \
 
   # libx264 stable
   && git clone -b stable http://git.videolan.org/git/x264.git x264 \
@@ -86,10 +86,10 @@ RUN set -ex \
   && cd /usr/src/ffmpeg \
   && rm -rf mstorsjo-fdk-aac* \
 
-  # libx265 2.7
-  && wget -O x265.tar.gz https://bitbucket.org/multicoreware/x265/downloads/x265_2.7.tar.gz \
+  # libx265 2.9
+  && wget -O x265.tar.gz https://bitbucket.org/multicoreware/x265/downloads/x265_2.9.tar.gz \
   && tar xzvf x265.tar.gz \
-  && cd x265_2.7/build/linux \
+  && cd x265_2.9/build/linux \
   && PATH="/usr/src/ffmpeg/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="/usr/src/ffmpeg/build" -DENABLE_SHARED:bool=off ../../source \
   && PATH="/usr/src/ffmpeg/bin:$PATH" make -j"$(nproc)" \
   && make install \
@@ -104,8 +104,8 @@ RUN set -ex \
   && cd /usr/src/ffmpeg \
   && rm -rf HandBrake \
 
-  # FFmpeg 3.3.5
-  && wget -O ffmpeg.zip https://github.com/FFmpeg/FFmpeg/archive/n3.3.5.zip \
+  # FFmpeg 4.1
+  && wget -O ffmpeg.zip https://github.com/FFmpeg/FFmpeg/archive/n4.1.zip \
   && unzip ffmpeg.zip \
   && mv FFmpeg* ffmpeg_src \
   && cd ffmpeg_src \
